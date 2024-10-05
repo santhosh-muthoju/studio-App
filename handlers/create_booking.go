@@ -34,6 +34,14 @@ func BookClass(c *gin.Context) {
 		Date:       bookingDate,
 	}
 
+	if bookingDate.Before(class.StartDate) || bookingDate.After(class.EndDate) {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success": false,
+			"message": "Booking date is outside the class duration",
+		})
+		return
+	}
+
 	if !models.CheckCapacity(booking.ClassID, bookingDate) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Class is fully booked for the selected date"})
 		return
