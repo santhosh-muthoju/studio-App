@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func BookClass(c *gin.Context) {
@@ -27,7 +28,10 @@ func BookClass(c *gin.Context) {
 		return
 	}
 
+	bookID := uuid.New().String()
+
 	booking := models.Booking{
+		BookingId:  bookID,
 		ClassID:    bookingRequest.ClassID,
 		ClassName:  class.ClassName,
 		MemberName: bookingRequest.MemberName,
@@ -52,6 +56,7 @@ func BookClass(c *gin.Context) {
 		"success": true,
 		"message": "Booking successful",
 		"data": gin.H{
+			"booking_id":  booking.BookingId,
 			"class":       class.ClassName,
 			"date":        bookingRequest.Date,
 			"member_name": bookingRequest.MemberName,

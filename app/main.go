@@ -11,6 +11,7 @@ func main() {
 	r.POST("/classes", handlers.CreateClass)
 	r.GET("/classes", handlers.ListOfClasses)
 	r.POST("/bookings", handlers.BookClass)
+	r.GET("/bookings", handlers.ListOfBookings)
 
 	r.Run(":8080")
 }

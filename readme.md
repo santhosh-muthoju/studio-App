@@ -102,6 +102,28 @@
 
   ```
 
+- `GET /bookings`
+
+  - Gives the array of list of bookings created.
+
+  - Response will be like:
+
+  ```
+     {
+      "data": [
+              {
+                  "booking_id": "uuid",
+                  "class": "className",
+                  "date": "2024-12-19T00:00:00Z",
+                  "member_name": "name"
+              }
+          ],
+          "message": "Bookings fetched",
+          "success": true
+      }
+
+  ```
+
   ```
 
   ```

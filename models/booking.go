@@ -9,21 +9,22 @@ type BookingRequest struct {
 }
 
 type Booking struct {
+	BookingId  string
 	ClassID    string
 	ClassName  string
 	MemberName string
 	Date       time.Time
 }
 
-var bookings []Booking
+var Bookings []Booking
 
 func AddBooking(booking Booking) {
-	bookings = append(bookings, booking)
+	Bookings = append(Bookings, booking)
 }
 
 func CheckCapacity(classID string, date time.Time) bool {
 	var count int
-	for _, booking := range bookings {
+	for _, booking := range Bookings {
 		if booking.ClassID == classID && booking.Date.Equal(date) {
 			count++
 		}
