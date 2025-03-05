@@ -1,139 +1,136 @@
 # Studio Classes API
 
+## Overview
+The **Studio Classes API** is a RESTful service built using Go and the Gin framework. It allows users to create and manage studio classes, book classes for members, and retrieve class and booking details.
+
 ## Setup
 
-1. Install dependencies:
+### Prerequisites
+Ensure you have Go installed on your system.
 
+### Installation
+1. Install project dependencies:
    ```sh
    go mod tidy
    ```
 
-2. Run the application:
-
+2. Build and run the application:
    ```sh
-   run the command
-   first:
-
    make build
-
-   next:
-
    make run
    ```
 
-## Endpoints
+## API Endpoints
 
-- `POST /classes`
+### 1. Create a Class
+**Endpoint:** `POST /classes`
 
-  - Creates a new class.
-  - Request body:
+Creates a new class with specified details.
 
-    ```json
+#### Request Body:
+```json
+{
+  "className": "string",
+  "startDate": "YYYY-MM-DD",
+  "endDate": "YYYY-MM-DD",
+  "capacity": "int"
+}
+```
+
+#### Response:
+```json
+{
+  "data": {
+      "class": "className",
+      "class_id": "uuid"
+  },
+  "message": "Class created successfully",
+  "success": true
+}
+```
+
+### 2. Book a Class
+**Endpoint:** `POST /bookings`
+
+Books a class for a member on a specific date.
+
+#### Request Body:
+```json
+{
+  "class_id": "uuid",
+  "member_name": "name",
+  "date": "YYYY-MM-DD"
+}
+```
+
+#### Response:
+```json
+{
+  "data": {
+      "class": "className",
+      "date": "2024-12-02",
+      "member_name": "member_name"
+  },
+  "message": "Booking successful",
+  "success": true
+}
+```
+
+### 3. Get List of Classes
+**Endpoint:** `GET /classes`
+
+Retrieves a list of all created classes.
+
+#### Response:
+```json
+{
+  "data": [
     {
-      "className": "string",
-      "startDate": "YYYY-MM-DD",
-      "endDate": "YYYY-MM-DD",
-      "capacity": "int"
-    }
-
-    Response:
-    {
-    "data": {
-        "class": "className",
-        "class_id": "uuid"
-    },
-    "message": "Class created successfully",
-    "success": true
-    }
-
-    ```
-
-- `POST /bookings`
-
-  - Books a class for a member.
-  - Request body:
-
-    ```json
-    {
-      "class_id": "uuid",
-      "member_name": "name",
-      "date": "YYYY-MM-DD"
-    }
-
-    Response:
-    {
-    "data": {
-        "class": "className",
-        "date": "2024-12-02",
-        "member_name": "member_name"
-    },
-    "message": "Booking successful",
-    "success": true
-    }
-    ```
-
-- `GET /classes`
-
-  - Gives the array of list of classes created.
-
-  - Response will be like:
-
-  ```
-      {
-      "data": [
-      {
       "id": "uuid",
       "class": "className",
       "start_date": "2024-12-01T00:00:00Z",
       "end_date": "2024-12-20T00:00:00Z",
       "capacity": 10
-      },
-      {
-      "id": "uuid",
+    }
+  ],
+  "message": "Classes fetched",
+  "success": true
+}
+```
+
+### 4. Get List of Bookings
+**Endpoint:** `GET /bookings`
+
+Retrieves a list of all class bookings.
+
+#### Response:
+```json
+{
+  "data": [
+    {
+      "booking_id": "uuid",
       "class": "className",
-      "start_date": "2024-12-01T00:00:00Z",
-      "end_date": "2024-12-20T00:00:00Z",
-      "capacity": 10
-      }
-      ],
-      "message": "Classes fetched",
-      "success": true
-      }
+      "date": "2024-12-19T00:00:00Z",
+      "member_name": "name"
+    }
+  ],
+  "message": "Bookings fetched",
+  "success": true
+}
+```
 
-  ```
-
-- `GET /bookings`
-
-  - Gives the array of list of bookings created.
-
-  - Response will be like:
-
-  ```
-     {
-      "data": [
-              {
-                  "booking_id": "uuid",
-                  "class": "className",
-                  "date": "2024-12-19T00:00:00Z",
-                  "member_name": "name"
-              }
-          ],
-          "message": "Bookings fetched",
-          "success": true
-      }
-
-  ```
-
-  ```
-
-  ```
-
-## Approach Taken
-
-- Developed RESTful API'S using Go and Gin.
-- Organized the project into handlers and models for clarity.
-- Used in-memory arrays for simplicity, ready for database integration.
+## Development Approach
+- Developed a **RESTful API** using **Go** and **Gin**.
+- Implemented a structured architecture with handlers and models for maintainability.
+- Used **in-memory storage** for data, with plans for future database integration.
 
 ## Testing
+You can use **Postman**, **cURL**, or any API testing tool to test the endpoints.
 
-- Use tools like Postman to test the API endpoints.
+---
+
+### Author
+**Studio Classes API Team**
+
+For any issues or contributions, please submit a pull request or report an issue.
+
