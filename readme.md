@@ -130,7 +130,7 @@ You can use **Postman**, **cURL**, or any API testing tool to test the endpoints
 ---
 
 ### Author
-**Studio Classes API Team**
+**Santhosh Muthoju**
 
 For any issues or contributions, please submit a pull request or report an issue.
 
